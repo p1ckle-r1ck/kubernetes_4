@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apps
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: apps
+  template:
+    metadata:
+      labels:
+        app: apps
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+        env:
+        - name: "HTTP_PORT"
+          value: "1091"
+
+      - name: mulitool
+        image: wbitt/network-multitool
+        ports:
+        - containerPort: 81
+        env:
+        - name: "HTTP_PORT"
+          value: "1092"
